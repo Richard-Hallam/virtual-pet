@@ -1,0 +1,6 @@
+function Pet(petName) {
+    const newPet = {name: petName};
+    return newPet;
+}
+
+module.exports = Pet;
