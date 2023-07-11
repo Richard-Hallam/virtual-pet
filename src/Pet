@@ -3,48 +3,58 @@ function Pet(petName) {
     this.age = 0;
     this.hunger = 0;
     this.fitness = 10;
-    //this.isAlive = true;
+    this.isAlive = true;
     };
 
  
-//Pet.prototype.isAlive = function(){
-//return this.age < 30 && this.hunger < 10 && this.fitness > 0;
-//};
+
 Pet.prototype = {
     get isAlive() {
-      return true;
-      //this.age < 30 && this.hunger < 10 && this.fitness > 0;
+      return this.age < 30 && this.hunger < 10 && this.fitness > 0;
     }
   };
 
 Pet.prototype.growUp = function() {
-    this.age += 1;
-    this.fitness = this.fitness - 3;
-    //Pet.prototype.isAlive()
+    if (!this.isAlive){
+       throw new Error('Your pet is no longer alive :(')
+    }
+    else{
+        this.age += 1;
+        this.fitness = this.fitness - 3;
+    }
+    
 };
 
 Pet.prototype.walk = function() {
-    if (this.fitness < 6){
+    if (!this.isAlive){
+       throw new Error('Your pet is no longer alive :(')
+    }
+    else if (this.fitness < 6){
         this.fitness += 4;
     }
     else{
         this.fitness = 10;
     }
-    //Pet.prototype.isAlive()
 }
 
 Pet.prototype.feed = function() {
-    if (this.hunger > 3){
+    if (!this.isAlive){
+       throw new Error('Your pet is no longer alive :(')
+    }
+    else if (this.hunger > 3){
         this.hunger -= 3;
     }
     else{
         this.hunger = 0;
     }
-    //Pet.prototype.isAlive()
+
 }
 
 Pet.prototype.checkUp = function(){
-    if (this.hunger >= 5 && this.fitness <= 3){
+    if (!this.isAlive){
+        return 'Your pet is no longer alive :('
+    }
+    else if (this.hunger >= 5 && this.fitness <= 3){
         return "I'm hungry and I need a walk.";
     }
     else if(this.hunger >= 5){
@@ -56,7 +66,6 @@ Pet.prototype.checkUp = function(){
     else if(this.hunger <= 4 && this.fitness >= 4){
         return 'I feel great.'
     }
-    //Pet.prototype.isAlive()
 }
 
 Pet.prototype.getLifeStatus = function(){}
